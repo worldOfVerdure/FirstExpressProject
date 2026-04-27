@@ -34,8 +34,12 @@ true). The qs library allows for richer objects and arrays to be encoded into th
 format, allowing for a JSON-like experience with URL-encoded.
 */
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(adminRoutes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
+app.use((req, res, next) => {
+  res.status(404).send('<h1>Page Not Found.</h1>');
+});
+
 app.listen(3000);
 /*
 Using middleware
@@ -88,3 +92,4 @@ This distinction exists because use() is designed for middleware (e.g., logging,
 apply broadly to a subtree of routes, while the HTTP verb methods are designed for specific route
 handlers.
 */
+console.log('Nodemon test restart');
