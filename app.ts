@@ -1,10 +1,15 @@
+import bodyParser from 'body-parser';
 import express from 'express';
 
+import { router as adminRoutes } from './routes/admin.ts';
+import { router as shopRoutes } from './routes/shop.ts';
 /*
 If we pass a function to app.use(), it will be executed every time the app receives a request. This
-is a great way to add logging, authentication, and other common functionality to your application. -
+is a great way to add logging, authentication, and other common functionality to your application.
+The .use() also allows us to pass in middleware functions that will be executed for every request to
+the app.
 
-This callback passed to use() recieves arguements req, res and next. The next function is used to
+This callback passed to use() recieves arguements req, res and next. The next() function is used to
 pass control to the next middleware function in the stack. If you don't call next(), and the current
 middleware does not end the request-response cycle, the request will be left hanging and the client
 will not receive a response.
@@ -21,16 +26,16 @@ app.use((req, res, next) => {
 //   next();//Allows request to continue to the next middleware in line.
 // });
 
-app.use('/add-product', (req, res, next) => {
-  console.log('In an add product middleware!', req.url);
-  res.send('<h1>The Add Product Page</h1>');//Allows us to send a response. This allows us to send a body of type any.
-});
-
-app.use('/', (req, res, next) => {
-  console.log('In another middleware!', req.url);
-  res.send('<h1>Hello from Express!</h1>');//Allows us to send a response. This allows us to send a body of type any.
-});
-
+/*
+This middleware will parse the body of incoming requests and make it available on req.body. The
+urlencoded parser is used for parsing form data. The extended option allows you to choose between
+parsing the URL-encoded data with the querystring library (when false) or the qs library (when
+true). The qs library allows for richer objects and arrays to be encoded into the URL-encoded
+format, allowing for a JSON-like experience with URL-encoded.
+*/
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(adminRoutes);
+app.use(shopRoutes);
 app.listen(3000);
 /*
 Using middleware
