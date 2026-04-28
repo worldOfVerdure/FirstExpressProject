@@ -1,9 +1,9 @@
 import express from 'express';
-import path from 'path';
+import { fileURLToPath } from 'url';
 
 export const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  //Allows us to send a response. This allows us to send a body of type any.
-  res.sendFile(path.join());//!zzz Contineu from lecture 70, 3:00.
+  const filePath = fileURLToPath(new URL('../views/shop.html', import.meta.url));
+  res.sendFile(filePath);
 });
