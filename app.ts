@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 
 import { router as adminRoutes } from './routes/admin.ts';
+import { router as pageNotFoundRoutes } from './routes/pageNotFound.ts';
 import { router as shopRoutes } from './routes/shop.ts';
 /*
 If we pass a function to app.use(), it will be executed every time the app receives a request. This
@@ -36,9 +37,7 @@ format, allowing for a JSON-like experience with URL-encoded.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
-app.use((req, res, next) => {
-  res.status(404).send('<h1>Page Not Found.</h1>');
-});
+app.use(pageNotFoundRoutes);
 
 app.listen(3000);
 /*
@@ -92,4 +91,3 @@ This distinction exists because use() is designed for middleware (e.g., logging,
 apply broadly to a subtree of routes, while the HTTP verb methods are designed for specific route
 handlers.
 */
-console.log('Nodemon test restart');

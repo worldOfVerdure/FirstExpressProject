@@ -1,4 +1,5 @@
 import express from 'express';
+import { fileURLToPath } from 'url';
 /*
 This router is like a mini express app tied to the other express app or pluggable into the other
 express app which we can export here.
@@ -7,7 +8,8 @@ export const router = express.Router();
 
 router.get('/add-product', (req, res, next) => {
   // console.log('In an add product middleware!', req.url);
-  res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title"/><button>Add Product</button></form>');
+  const filePath = fileURLToPath(new URL('../views/add-product.html', import.meta.url));
+  res.sendFile(filePath);
 });
 
 router.post('/add-product', (req, res, next) => {
@@ -15,6 +17,6 @@ router.post('/add-product', (req, res, next) => {
   to handle it. See the above middleware. Note this parser middleware should be registered before
   any route that needs to access req.body; hence, being before the route handlers. To get this
   functionality, we install: $ npm install --save body-parser */
-  console.log(req.body);
+  // console.log(req.body);
   res.redirect('/');
 });
