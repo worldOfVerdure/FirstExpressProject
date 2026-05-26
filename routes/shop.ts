@@ -1,9 +1,9 @@
 import express from 'express';
-import { fileURLToPath } from 'url';
+import { getPath } from '../util/path.ts';
 
 export const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  const filePath = fileURLToPath(new URL('../views/shop.html', import.meta.url));
+  const filePath = getPath('../views/shop.html');
   res.sendFile(filePath);
 });
