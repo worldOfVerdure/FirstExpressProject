@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPath } from '../util/path.ts';
+import { getSafePath } from '../util/path.ts';
 /*
 This router is like a mini express app tied to the other express app or pluggable into the other
 express app which we can export here.
@@ -8,7 +8,7 @@ export const router = express.Router();
 
 router.get('/add-product', (req, res, next) => {
   // console.log('In an add product middleware!', req.url);
-  const filePath = getPath('../views/add-product.html');
+  const filePath = getSafePath('views/add-product.html');
   res.sendFile(filePath);
 });
 
