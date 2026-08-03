@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 // Step 1: Establish the safe base directory (the module's directory)
-// baseDir is loosely: C:/Users/[...]/FirstExpressProject/util
+// baseDir is loosely: C:/Users/[...]/FirstExpressProject/
 const baseDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 // Step 2–4: Resolve, normalize, validate, and return the safe path

@@ -4,6 +4,7 @@ import express from 'express';
 import { router as adminRoutes } from './routes/admin.ts';
 import { router as pageNotFoundRoutes } from './routes/pageNotFound.ts';
 import { router as shopRoutes } from './routes/shop.ts';
+import { getSafePath } from './util/path.ts';
 /*
 If we pass a function to app.use(), it will be executed every time the app receives a request. This
 is a great way to add logging, authentication, and other common functionality to your application.
@@ -35,6 +36,9 @@ true). The qs library allows for richer objects and arrays to be encoded into th
 format, allowing for a JSON-like experience with URL-encoded.
 */
 app.use(bodyParser.urlencoded({ extended: false }));
+/* Built in middleware, serves static files. Pass in a path to the folder we want to serve
+statically. We grant read access to the path. */
+app.use(express.static(getSafePath('public')));
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(pageNotFoundRoutes);
