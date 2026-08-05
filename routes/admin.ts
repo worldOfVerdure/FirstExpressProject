@@ -6,6 +6,8 @@ express app which we can export here.
 */
 export const router = express.Router();
 
+export const products: { title: string }[] = [];
+
 router.get('/add-product', (req, res, next) => {
   // console.log('In an add product middleware!', req.url);
   const filePath = getSafePath('views/add-product.html');
@@ -17,6 +19,6 @@ router.post('/add-product', (req, res, next) => {
   to handle it. See the above middleware. Note this parser middleware should be registered before
   any route that needs to access req.body; hence, being before the route handlers. To get this
   functionality, we install: $ npm install --save body-parser */
-  // console.log(req.body);
+  products.push({title: req.body.title})
   res.redirect('/');
 });

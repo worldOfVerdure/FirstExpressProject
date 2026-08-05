@@ -1,6 +1,6 @@
 import express from 'express';
 //router
-import { router as adminRoutes } from './routes/admin.ts';
+import * as adminData from './routes/admin.ts';
 import { router as pageNotFoundRoutes } from './routes/pageNotFound.ts';
 import { router as shopRoutes } from './routes/shop.ts';
 //utility function
@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 /* Built in middleware, serves static files. Pass in a path to the folder we want to serve
 statically. We grant read access to the path. */
 app.use(express.static(getSafePath('public')));
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.router);
 app.use(shopRoutes);
 app.use(pageNotFoundRoutes);
 
