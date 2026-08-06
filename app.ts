@@ -17,6 +17,20 @@ middleware does not end the request-response cycle, the request will be left han
 will not receive a response.
 */
 const app = express();
+/* app.set() allows us to set any values globally on our express application which can be keys or
+configuration items Express doesn't understand. 
+
+set has some keywords, two being important to us now:
+view engine - allows us to set a template engine for our application. We will be using pug as our
+template engine.
+views - allows us to set the path to the folder where our template files are located. We will be
+using the views folder in our root directory for this purpose. If an array, the views are looked up
+in the order they are specified in the array. If a string, it is treated as a single path to look
+up views. If a function, it is called with the view name and the options object, and should return
+the path to the view file. If not set, the default value is process.cwd() + '/views'.
+*/
+app.set('view engine', 'pug');
+app.set('views', getSafePath('views'));
 
 app.use((req, res, next) => {
   if (req.url === '/favicon.ico') return res.status(204).end();
