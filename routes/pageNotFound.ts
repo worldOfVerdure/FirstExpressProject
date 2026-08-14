@@ -4,6 +4,6 @@ import { getSafePath } from '../util/path.ts';
 export const router = express.Router();
 
 router.use((req, res, next) => {
-  const filePath = getSafePath('views/404.html');
-  res.status(404).sendFile(filePath);
+  res.status(404).render('404', {docTitle: 'Page Not Found'});
+  // res.status(404).sendFile(filePath);
 });

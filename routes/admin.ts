@@ -1,5 +1,5 @@
 import express from 'express';
-import { getSafePath } from '../util/path.ts';
+// import { getSafePath } from '../util/path.ts';
 /*
 This router is like a mini express app tied to the other express app or pluggable into the other
 express app which we can export here.
@@ -10,8 +10,8 @@ export const products: { title: string }[] = [];
 
 router.get('/add-product', (req, res, next) => {
   // console.log('In an add product middleware!', req.url);
-  const filePath = getSafePath('views/add-product.html');
-  res.sendFile(filePath);
+  res.render('add-product', {docTitle: 'Add Product', path: '/admin/add-product'});
+  // res.sendFile(filePath);
 });
 
 router.post('/add-product', (req, res, next) => {
